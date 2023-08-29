@@ -1,0 +1,12 @@
+trigger:
+ - main 
+
+pool:
+  vmImage: 'macos-latest'
+
+steps:
+- script: flutter pub get
+  displayName: 'Flutter: Get Packages'
+
+- script: flutter build web --release
+  displayName: 'Flutter: Build Web'
