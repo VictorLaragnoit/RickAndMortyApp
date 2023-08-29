@@ -1,7 +1,7 @@
 # Docs for the Azure Web Apps Deploy action: https://github.com/Azure/webapps-deploy
 # More GitHub Actions for Azure: https://github.com/Azure/actions
 
-name: Build and deploy Node.js app to Azure Web App - rickAndMortyApp
+name: Build and deploy Flutter web app to Azure
 
 on:
   push:
@@ -16,22 +16,19 @@ jobs:
     steps:
       - uses: actions/checkout@v2
 
-      - name: Set up Node.js version
-        uses: actions/setup-node@v1
+      - name: Set up Flutter
+        uses: subosito/flutter-action@v2
         with:
-          node-version: '16.x'
+          flutter-version: '2.x'  # Use a versão do Flutter desejada
 
-      - name: npm install, build, and test
-        run: |
-          npm install
-          npm run build --if-present
-          npm run test --if-present
+      - name: Flutter Web build
+        run: flutter build web --release
 
       - name: Upload artifact for deployment job
         uses: actions/upload-artifact@v2
         with:
-          name: node-app
-          path: .
+          name: flutter-web-app
+          path: build/web
 
   deploy:
     runs-on: ubuntu-latest
@@ -44,13 +41,17 @@ jobs:
       - name: Download artifact from build job
         uses: actions/download-artifact@v2
         with:
-          name: node-app
+          name: flutter-web-app
 
       - name: 'Deploy to Azure Web App'
         id: deploy-to-webapp
         uses: azure/webapps-deploy@v2
         with:
-          app-name: 'rickAndMortyApp'
+          app-name: 'rickAndMortyApp'  # Nome do App Service no Azure
+          slot-name: 'Production'
+          publish-profile: ${{ secrets.AZUREAPPSERVICE_PUBLISHPROFILE_09A73E4A7B784F87A2AC8B33F4634352 }}
+          package: .
+
           slot-name: 'Production'
           publish-profile: ${{ secrets.AZUREAPPSERVICE_PUBLISHPROFILE_09A73E4A7B784F87A2AC8B33F4634352 }}
           package: .
