@@ -12,7 +12,7 @@ class EpisodeDetailsPage extends StatelessWidget {
       return Column(
         children: [
           Image.network(characterUrl['image']),
-          SizedBox(height: 8),
+          const SizedBox(height: 8),
           Text('nome: ${characterUrl['name']}')
         ],
       );
@@ -23,28 +23,28 @@ class EpisodeDetailsPage extends StatelessWidget {
         children: [
           Text('Nome do Local: ${location['name']}'),
           Text('Dimensão: ${location['dimension']}'),
-          SizedBox(height: 16),
+          const SizedBox(height: 16),
         ],
       );
     }).toList();
 
     return Scaffold(
       appBar: AppBar(
-        title: Text('Detalhes do Episódio'),
+        title: const Text('Detalhes do Episódio'),
       ),
       body: SingleChildScrollView(
-        padding: EdgeInsets.all(16),
+        padding: const EdgeInsets.all(16),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: [
             Text('Nome do Episódio: ${episode['name']}'),
             Text('Data de Lançamento: ${episode['air_date']}'),
-            SizedBox(height: 32),
-            Text('Personagens Usados:',
+            const SizedBox(height: 32),
+            const Text('Personagens Usados:',
                 style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold)),
             Column(children: characterWidgets),
-            SizedBox(height: 32),
-            Text('Locais Usados:',
+            const SizedBox(height: 32),
+            const Text('Locais Usados:',
                 style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold)),
             Column(children: locationWidgets),
           ],

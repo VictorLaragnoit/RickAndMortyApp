@@ -11,13 +11,15 @@ import 'package:rickmorty/shared/custom_widgets.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class WelcomePage extends StatefulWidget {
+  const WelcomePage({super.key});
+
   @override
   _WelcomePageState createState() => _WelcomePageState();
 }
 
 class _WelcomePageState extends State<WelcomePage> {
   final ApiService apiService = ApiService();
-
+  // all general vars to use the api results
   List<Character> characters = [];
   List<Location> locations = [];
   Map<String, dynamic> episode = {};
@@ -35,6 +37,7 @@ class _WelcomePageState extends State<WelcomePage> {
     _loadLocations();
   }
 
+  // function to call api and get locations
   Future<void> _loadLocations() async {
     final locationsData = await apiService.getLocations();
     setState(() {
@@ -42,6 +45,7 @@ class _WelcomePageState extends State<WelcomePage> {
     });
   }
 
+  // fuction to call api and get characters
   Future<void> _loadCharacters() async {
     final charactersData = await apiService.getCharacters();
     setState(() {
@@ -49,6 +53,7 @@ class _WelcomePageState extends State<WelcomePage> {
     });
   }
 
+  // function to load a generate epsode using persistent storage
   void _loadEpisodeHistory() async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
     final historyJson = prefs.getString('episode_history');
@@ -60,6 +65,7 @@ class _WelcomePageState extends State<WelcomePage> {
     }
   }
 
+  // function to save a epsode after create it. also using persistent storage
   void _saveEpisodeHistory(Map<String, dynamic> episode) async {
     episodeHistory.insert(0, episode);
     SharedPreferences prefs = await SharedPreferences.getInstance();
@@ -82,7 +88,7 @@ class _WelcomePageState extends State<WelcomePage> {
         .map((character) => {
               'name': character.name,
               'image': character.image,
-            }) // Use the 'image' field instead of 'toJson()'
+            })
         .toList();
 
     // Convert selected locations to a list of maps
@@ -104,7 +110,6 @@ class _WelcomePageState extends State<WelcomePage> {
     };
 
     _saveEpisodeHistory(episode);
-    print(episode);
     Navigator.push(
       context,
       MaterialPageRoute(builder: (context) => EpisodeDetailsPage(episode)),
@@ -116,8 +121,8 @@ class _WelcomePageState extends State<WelcomePage> {
   @override
   Widget build(BuildContext context) {
     var drawerHeader = UserAccountsDrawerHeader(
-      decoration: BoxDecoration(
-        color: const Color.fromARGB(255, 46, 113, 141),
+      decoration: const BoxDecoration(
+        color: Color.fromARGB(255, 46, 113, 141),
       ),
       currentAccountPicture: CircleAvatar(
         backgroundColor: Colors.white,
@@ -126,7 +131,7 @@ class _WelcomePageState extends State<WelcomePage> {
       accountEmail: null,
       accountName: Text(
         _characters_list![0].name,
-        style: TextStyle(fontSize: 20),
+        style: const TextStyle(fontSize: 20),
       ),
     );
     final drawerItems = ListView(
@@ -170,9 +175,9 @@ class _WelcomePageState extends State<WelcomePage> {
         ),
       ),
       appBar: AppBar(
-        title: Center(
+        title: const Center(
           child: Text(
-            'Rick And Morty App',
+            'Rick e Morty App',
             style: TextStyle(fontSize: 30, fontWeight: FontWeight.bold),
           ),
         ),
@@ -191,7 +196,7 @@ class _WelcomePageState extends State<WelcomePage> {
             ),
             SizedBox(height: media * 0.02),
             Text(
-              'Create Episode',
+              'Criar Episodio',
               style: TextStyle(fontSize: media * 0.07),
             ),
             SizedBox(height: media * 0.02),
@@ -215,7 +220,7 @@ class _WelcomePageState extends State<WelcomePage> {
                     (index) {
                       return DropdownMenuItem<int>(
                         value: index,
-                        child: Text('${index}'),
+                        child: Text('$index'),
                       );
                     },
                   ),
@@ -253,11 +258,9 @@ class _WelcomePageState extends State<WelcomePage> {
             SizedBox(height: media * 0.02),
             ElevatedButton(
               onPressed: () async {
-                _generateEpisode(numCharacterChoose,
-                    numLocationChoose); // Example values for character and location counts
-                // Gere os personagens aleatoriamente ou conforme sua lógica
+                _generateEpisode(numCharacterChoose, numLocationChoose);
               },
-              child: Text('Criar Episódio'),
+              child: const Text('Criar Episódio'),
             ),
           ],
         ),

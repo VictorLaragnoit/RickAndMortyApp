@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 class CustomListTitle extends StatelessWidget {
   IconData icon;
   String text;
-  VoidCallback? onTap; // Atualize o tipo da propriedade onTap
+  VoidCallback? onTap;
 
   CustomListTitle(this.icon, this.text, this.onTap);
 

@@ -28,7 +28,7 @@ class _LocalsListPageState extends State<LocalsListPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Center(child: Text('Rick and Morty Locations')),
+        title: const Center(child: Text('Locais em Rick and Morty')),
       ),
       body: _buildBody(),
     );
@@ -44,7 +44,7 @@ class _LocalsListPageState extends State<LocalsListPage> {
           final locations = _locations![index];
           return ListTile(
             title: Text(locations.name),
-            // leading: Text(locations.dimension),
+            trailing: Text(locations.dimension),
             subtitle: Text(locations.type),
           );
         },

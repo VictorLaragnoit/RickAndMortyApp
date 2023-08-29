@@ -10,7 +10,7 @@ class ApiService {
   final String _localsUrl = '/api/location';
   final String _charactersJsonKey = 'results';
   final String _localsJsonKey = 'results';
-
+  // API GET async characters
   Future<List<Character>?> getCharacters() async {
     final uri = Uri.https(_baseUrl, _charactersUrl);
     final response = await _getJson(uri);
@@ -23,6 +23,7 @@ class ApiService {
     return _convert(response?[_charactersJsonKey]);
   }
 
+  // API GET async Locations
   Future<List<Location>?> getLocations() async {
     final uri = Uri.https(_baseUrl, _localsUrl);
     final response = await _getJson(uri);
@@ -35,6 +36,7 @@ class ApiService {
     return _convertLocation(response?[_localsJsonKey]);
   }
 
+  // Json decode of API GET
   Future<Map<String, dynamic>?> _getJson(Uri uri) async {
     try {
       final response = await http.get(uri);
