@@ -30,6 +30,7 @@ git clone https://github.com/VictorLaragnoit/RickAndMortyApp.git
 
 ```bash
 flutter pub get
+flutter run
 ```
 
 ## Uso
