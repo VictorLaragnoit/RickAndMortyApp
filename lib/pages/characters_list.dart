@@ -26,15 +26,27 @@ class _CharacterListPageState extends State<CharacterListPage> {
 
   @override
   Widget build(BuildContext context) {
+    double screenWidth = MediaQuery.of(context).size.width;
+    // Calculate responsive values
+    double fontSize = screenWidth * 0.015;
+
     return Scaffold(
       appBar: AppBar(
-        title: const Center(child: Text('Rick and Morty Characters')),
+        title: Center(
+            child: Text(
+          'Personagens em Rick and Morty',
+          style: TextStyle(fontSize: fontSize),
+        )),
       ),
       body: _buildBody(),
     );
   }
 
   Widget _buildBody() {
+    double screenWidth = MediaQuery.of(context).size.width;
+
+    double fontSize = screenWidth * 0.02;
+
     if (_characters == null) {
       return const Center(child: CircularProgressIndicator());
     } else {
@@ -43,9 +55,17 @@ class _CharacterListPageState extends State<CharacterListPage> {
         itemBuilder: (context, index) {
           final character = _characters![index];
           return ListTile(
-            leading: Image.network(character.image),
-            title: Text(character.name),
-            subtitle: Text(character.species),
+            leading: Image.network(
+              character.image,
+            ),
+            title: Text(
+              character.name,
+              style: TextStyle(fontSize: fontSize),
+            ),
+            subtitle: Text(
+              character.species,
+              style: TextStyle(fontSize: fontSize),
+            ),
           );
         },
       );

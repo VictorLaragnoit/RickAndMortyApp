@@ -9,7 +9,12 @@ class CustomListTitle extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final double media = MediaQuery.of(context).size.width;
+    double screenWidth = MediaQuery.of(context).size.width;
+    double screenHeight = MediaQuery.of(context).size.height;
+    // Calculate responsive values
+
+    double fontSize = screenWidth * 0.02;
+
     return Padding(
       padding: const EdgeInsets.fromLTRB(8.0, 0, 8.0, 0),
       child: InkWell(
@@ -17,18 +22,21 @@ class CustomListTitle extends StatelessWidget {
         splashColor: Colors.blueAccent,
         onTap: onTap,
         child: SizedBox(
-          height: media * 0.2,
+          height: screenHeight * 0.2,
           child: Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: <Widget>[
               Row(
                 children: <Widget>[
-                  Icon(icon),
+                  Icon(
+                    icon,
+                    size: screenHeight * 0.03,
+                  ),
                   Padding(
                     padding: const EdgeInsets.all(8.0),
                     child: Text(
                       text,
-                      style: const TextStyle(fontSize: 20),
+                      style: TextStyle(fontSize: fontSize),
                     ),
                   )
                 ],

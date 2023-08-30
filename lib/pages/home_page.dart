@@ -120,6 +120,14 @@ class _WelcomePageState extends State<WelcomePage> {
 
   @override
   Widget build(BuildContext context) {
+    double screenWidth = MediaQuery.of(context).size.width;
+    double screenHeight = MediaQuery.of(context).size.height;
+    // Calculate responsive values
+    double imageWidth = screenWidth * 0.3;
+    double imageHeight = screenHeight * 0.3;
+    double fontSize = screenWidth * 0.02;
+    double dropdownFontSize = screenWidth * 0.02;
+
     var drawerHeader = UserAccountsDrawerHeader(
       decoration: const BoxDecoration(
         color: Color.fromARGB(255, 46, 113, 141),
@@ -131,7 +139,7 @@ class _WelcomePageState extends State<WelcomePage> {
       accountEmail: null,
       accountName: Text(
         _characters_list![0].name,
-        style: const TextStyle(fontSize: 20),
+        style: TextStyle(fontSize: fontSize * 0.7),
       ),
     );
     final drawerItems = ListView(
@@ -165,11 +173,10 @@ class _WelcomePageState extends State<WelcomePage> {
         ),
       ],
     );
-    final double media = MediaQuery.of(context).size.width;
 
     return Scaffold(
       drawer: Container(
-        width: media * 0.8,
+        width: screenHeight * 0.8,
         child: Drawer(
           child: drawerItems,
         ),
@@ -187,27 +194,27 @@ class _WelcomePageState extends State<WelcomePage> {
           mainAxisAlignment: MainAxisAlignment.start,
           children: <Widget>[
             Container(
-              margin: EdgeInsets.only(top: media * 0.05),
+              margin: EdgeInsets.only(top: screenHeight * 0.05),
               child: Image.network(
                 _characters_list![1].image,
-                width: media * 0.5,
-                height: media * 0.5,
+                width: imageWidth,
+                height: imageHeight,
               ),
             ),
-            SizedBox(height: media * 0.02),
+            SizedBox(height: screenHeight * 0.01),
             Text(
               'Criar Episodio',
-              style: TextStyle(fontSize: media * 0.07),
+              style: TextStyle(fontSize: fontSize),
             ),
-            SizedBox(height: media * 0.02),
+            SizedBox(height: screenHeight * 0.01),
             Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: <Widget>[
                 Text(
                   'Numero de Personagens:  ',
-                  style: TextStyle(fontSize: media * 0.04),
+                  style: TextStyle(fontSize: fontSize),
                 ),
-                SizedBox(height: media * 0.09),
+                SizedBox(height: screenHeight * 0.01),
                 DropdownButton<int>(
                   value: numCharacterChoose,
                   onChanged: (newValue) {
@@ -220,22 +227,25 @@ class _WelcomePageState extends State<WelcomePage> {
                     (index) {
                       return DropdownMenuItem<int>(
                         value: index,
-                        child: Text('$index'),
+                        child: Text(
+                          ' ${index}',
+                          style: TextStyle(fontSize: dropdownFontSize),
+                        ),
                       );
                     },
                   ),
                 ),
               ],
             ),
-            SizedBox(height: media * 0.02),
+            SizedBox(height: screenHeight * 0.01),
             Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: <Widget>[
                 Text(
                   'Numero de Locais:  ',
-                  style: TextStyle(fontSize: media * 0.04),
+                  style: TextStyle(fontSize: fontSize),
                 ),
-                SizedBox(height: media * 0.09),
+                SizedBox(height: screenHeight * 0.01),
                 DropdownButton<int>(
                   value: numLocationChoose,
                   onChanged: (newValue) {
@@ -248,14 +258,17 @@ class _WelcomePageState extends State<WelcomePage> {
                     (index) {
                       return DropdownMenuItem<int>(
                         value: index,
-                        child: Text('${index}'),
+                        child: Text(
+                          ' ${index}',
+                          style: TextStyle(fontSize: dropdownFontSize),
+                        ),
                       );
                     },
                   ),
                 ),
               ],
             ),
-            SizedBox(height: media * 0.02),
+            SizedBox(height: screenHeight * 0.01),
             ElevatedButton(
               onPressed: () async {
                 _generateEpisode(numCharacterChoose, numLocationChoose);

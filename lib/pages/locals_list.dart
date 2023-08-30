@@ -26,15 +26,25 @@ class _LocalsListPageState extends State<LocalsListPage> {
 
   @override
   Widget build(BuildContext context) {
+    double screenWidth = MediaQuery.of(context).size.width;
+
+    double fontSize = screenWidth * 0.015;
     return Scaffold(
       appBar: AppBar(
-        title: const Center(child: Text('Locais em Rick and Morty')),
+        title: Center(
+            child: Text(
+          'Locais em Rick and Morty',
+          style: TextStyle(fontSize: fontSize),
+        )),
       ),
       body: _buildBody(),
     );
   }
 
   Widget _buildBody() {
+    double screenWidth = MediaQuery.of(context).size.width;
+
+    double fontSize = screenWidth * 0.01;
     if (_locations == null) {
       return const Center(child: CircularProgressIndicator());
     } else {
@@ -43,9 +53,18 @@ class _LocalsListPageState extends State<LocalsListPage> {
         itemBuilder: (context, index) {
           final locations = _locations![index];
           return ListTile(
-            title: Text(locations.name),
-            trailing: Text(locations.dimension),
-            subtitle: Text(locations.type),
+            title: Text(
+              locations.name,
+              style: TextStyle(fontSize: fontSize),
+            ),
+            trailing: Text(
+              locations.dimension,
+              style: TextStyle(fontSize: fontSize),
+            ),
+            subtitle: Text(
+              locations.type,
+              style: TextStyle(fontSize: fontSize),
+            ),
           );
         },
       );
