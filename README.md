@@ -26,7 +26,7 @@ Além disso, o web app oferece acesso a informações adicionais por meio de um 
 git clone https://github.com/VictorLaragnoit/RickAndMortyApp.git
 ```
 2. Navegue até o diretório do projeto usando o terminal.
-3. Execute o seguinte comando para instalar as dependências:
+3. Execute o seguinte comando para instalar as dependências e rodar o app:
 
 ```bash
 flutter pub get
